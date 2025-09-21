@@ -1,12 +1,13 @@
+//Tutorial 0 - LED Test
+//Wipes LED's one at a time in RED then GREEN then BLUE
+
+
 #include <Arduino.h>
 #include <FastLED.h>
 
 
-
-
 //Pin Definitions
 #define PIXEL_PIN 4
-
 
 
 //Screen Definitions
@@ -23,28 +24,7 @@ CRGB leds[NUM_LEDS];
 
 
 
-
-
-
-
-
-// Initializes Hardware (This only runs at startup once.)
-void setup() {
-
-
-  // ---- LED MATRIX ---- This sets up the display to work with the badge's unique hardware layout
-  FastLED.addLeds<CHIPSET, PIXEL_PIN, COLOR_ORDER>(leds, NUM_LEDS);
-  FastLED.setMaxPowerInVoltsAndMilliamps(5, 1000); // FastLED attempts to manage power draw dyanically for us. We ABSOLUTELY do not want the LED's to draw too much power
-  FastLED.setBrightness(dispBrightness);
-  FastLED.clear(true);
-  FastLED.show();
-  
-}
-
-
-
-
-
+//Fill LED String with Color
 void colorWipe(CRGB color, int wait) {
   for (int i = 0; i < NUM_LEDS; i++) {
     leds[i] = color;
@@ -53,6 +33,22 @@ void colorWipe(CRGB color, int wait) {
   }
   delay(500); // pause at the end before switching color
 }
+
+
+
+
+// Initializes Hardware (This only runs at startup once.)
+void setup() {
+  // ---- LED MATRIX ---- This sets up the display to work with the badge's unique hardware layout
+  FastLED.addLeds<CHIPSET, PIXEL_PIN, COLOR_ORDER>(leds, NUM_LEDS);
+  FastLED.setMaxPowerInVoltsAndMilliamps(5, 1000); // FastLED attempts to manage power draw dyanically for us. We ABSOLUTELY do not want the LED's to draw too much power
+  FastLED.setBrightness(dispBrightness);
+  FastLED.clear(true);
+  FastLED.show();
+}
+
+
+
 
 // Main Program Loop (This runs every frame.)
 void loop() {
